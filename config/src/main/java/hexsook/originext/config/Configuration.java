@@ -17,10 +17,14 @@ public class Configuration extends BaseConfiguration {
     private boolean isLoading = false;
 
     public Configuration(File file, InputStream source, Class<? extends ConfigurationAdapter> adapter)
-            throws ConfigurationCreationException {
+            throws ConfigurationException {
         super(new LinkedHashMap<>());
         this.file = file;
         this.adapter = ConfigurationAdapter.getAdapter(adapter);
+
+        if (this.adapter == null) {
+            throw new ConfigurationException(new IllegalArgumentException("No such adapter: " + adapter), file);
+        }
 
         if (!file.exists()) {
             try {
@@ -30,7 +34,7 @@ public class Configuration extends BaseConfiguration {
                     Files.copy(source, file.toPath());
                 }
             } catch (IOException e) {
-                throw new ConfigurationCreationException(e, file);
+                throw new ConfigurationException(e, file);
             }
         }
 
@@ -38,7 +42,7 @@ public class Configuration extends BaseConfiguration {
     }
 
     public Configuration(File file, Class<? extends ConfigurationAdapter> adapter)
-            throws ConfigurationCreationException {
+            throws ConfigurationException {
         this(file, null, adapter);
     }
 

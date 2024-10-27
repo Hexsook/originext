@@ -5,11 +5,11 @@ which help to reduce boilerplate code and offer alternative paradigms for creati
 originext supports **Java 1.8** or above.
 
 ### Modules
-##### `originext-all`: The all-in-one module
-##### `originext-config`: Provides simplified ways to manage config
-##### `originext-object`: Provides object operations
-##### `originext-reflection`: Provides reflection operations
-##### `originext-common`: Provides common used classes and utilities
+##### [`originext-all`](https://github.com/Hexsook/originext/tree/master/all): The all-in-one module
+##### [`originext-config`](https://github.com/Hexsook/originext/tree/master/config): Provides simplified ways to manage config
+##### [`originext-object`](https://github.com/Hexsook/originext/tree/master/object): Provides object operations
+##### [`originext-reflection`](https://github.com/Hexsook/originext/tree/master/reflection): Provides reflection operations
+##### [`originext-common`](https://github.com/Hexsook/originext/tree/master/common): Provides common used classes and utilities
 
 ### Adding originext to your project
 **How to**: Add the dependency to pom.xml in your project:

@@ -1,74 +1,228 @@
 package hexsook.originext.config;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 /**
- * Derived class of BaseConfiguration.
- * This class can be used for loading configuration from file.
+ * Base class of configuration.
  */
-public class Configuration extends BaseConfiguration {
+public class Configuration {
 
-    private final File file;
-    private final ConfigurationAdapter adapter;
-    private boolean isLoading = false;
+    private final Map<String, Object> map = new LinkedHashMap<>();
 
-    public Configuration(File file, InputStream source, Class<? extends ConfigurationAdapter> adapter)
-            throws ConfigurationException {
-        super(new LinkedHashMap<>());
-        this.file = file;
-        this.adapter = ConfigurationAdapter.getAdapter(adapter);
+    public Configuration(Map<?, ?> map) {
+        load(map);
+    }
 
-        if (this.adapter == null) {
-            throw new ConfigurationException(new IllegalArgumentException("No such adapter: " + adapter), file);
+    public void load(Map<?, ?> map) {
+        map.forEach((key, value) -> {
+            String strKey = key == null ? "NULL" : key.toString();
+            this.map.put(strKey, value instanceof Map<?, ?> ? new Configuration((Map<?, ?>) value) : value);
+        });
+    }
+
+    public Map<String, Object> getMap() {
+        return map;
+    }
+
+    public String getChild(String path) {
+        int index = path.indexOf(".");
+        return (index == -1) ? null : path.substring(index + 1);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T get(String path, T def) {
+        int firstDot = path.indexOf(".");
+        if (firstDot == -1) {
+            return (T) Optional.ofNullable(map.get(path)).orElse(def);
         }
+        Configuration section = (Configuration) map.get(path.substring(0, firstDot));
+        return (section == null) ? def : section.get(getChild(path), def);
+    }
 
-        if (!file.exists()) {
-            try {
-                if (source == null) {
-                    file.createNewFile();
-                } else {
-                    Files.copy(source, file.toPath());
-                }
-            } catch (IOException e) {
-                throw new ConfigurationException(e, file);
+    public Object get(String path) {
+        return get(path, null);
+    }
+
+    public <T> T getOrSet(String path, T newValue) {
+        T original = get(path, null);
+        if (original != null) {
+            return original;
+        }
+        set(path, newValue);
+        return newValue;
+    }
+
+    public void set(String path, Object value) {
+        int firstDot = path.indexOf(".");
+        if (firstDot == -1) {
+            if (value == null) {
+                map.remove(path);
+            } else {
+                map.put(path, value instanceof Map<?, ?> ? new Configuration((Map<?, ?>) value) : value);
+            }
+        } else {
+            Configuration section = (Configuration) map.get(path.substring(0, firstDot));
+            if (section == null) {
+                section = new Configuration(new LinkedHashMap<>());
+                map.put(path.substring(0, firstDot), section);
+            }
+            section.set(getChild(path), value);
+        }
+    }
+
+    public boolean containsKey(String path) {
+        return get(path) != null;
+    }
+
+    public void setIfAbsent(String path, Object value) {
+        if (!containsKey(path)) {
+            set(path, value);
+        }
+    }
+
+    public Configuration getSection(String path) {
+        return (Configuration) get(path);
+    }
+
+    public Collection<String> getKeys() {
+        return new LinkedHashSet<>(map.keySet());
+    }
+
+    public byte getByte(String path) {
+        return getByte(path, (byte) -1);
+    }
+
+    public byte getByte(String path, byte def) {
+        Number val = get(path, def);
+        return (val != null) ? val.byteValue() : def;
+    }
+
+    public List<Byte> getByteList(String path) {
+        return getList(path, Byte.class);
+    }
+
+    public short getShort(String path) {
+        return getShort(path, (short) -1);
+    }
+
+    public short getShort(String path, short def) {
+        Number val = get(path, def);
+        return (val != null) ? val.shortValue() : def;
+    }
+
+    public List<Short> getShortList(String path) {
+        return getList(path, Short.class);
+    }
+
+    public int getInteger(String path) {
+        return getInteger(path, -1);
+    }
+
+    public int getInteger(String path, int def) {
+        Number val = get(path, def);
+        return (val != null) ? val.intValue() : def;
+    }
+
+    public List<Integer> getIntegerList(String path) {
+        return getList(path, Integer.class);
+    }
+
+    public long getLong(String path) {
+        return getLong(path, -1);
+    }
+
+    public long getLong(String path, long def) {
+        Number val = get(path, def);
+        return (val != null) ? val.longValue() : def;
+    }
+
+    public List<Long> getLongList(String path) {
+        return getList(path, Long.class);
+    }
+
+    public float getFloat(String path) {
+        return getFloat(path, -1);
+    }
+
+    public float getFloat(String path, float def) {
+        Number val = get(path, def);
+        return (val != null) ? val.floatValue() : def;
+    }
+
+    public List<Float> getFloatList(String path) {
+        return getList(path, Float.class);
+    }
+
+    public double getDouble(String path) {
+        return getDouble(path, -1);
+    }
+
+    public double getDouble(String path, double def) {
+        Number val = get(path, def);
+        return (val != null) ? val.doubleValue() : def;
+    }
+
+    public List<Double> getDoubleList(String path) {
+        return getList(path, Double.class);
+    }
+
+    public boolean getBoolean(String path) {
+        return getBoolean(path, false);
+    }
+
+    public boolean getBoolean(String path, boolean def) {
+        Boolean val = get(path, def);
+        return (val != null) ? val : def;
+    }
+
+    public List<Boolean> getBooleanList(String path) {
+        return getList(path, Boolean.class);
+    }
+
+    public char getChar(String path) {
+        return getChar(path, '\u0000');
+    }
+
+    public char getChar(String path, char def) {
+        Character val = get(path, def);
+        return (val != null) ? val : def;
+    }
+
+    public List<Character> getCharList(String path) {
+        return getList(path, Character.class);
+    }
+
+    public String getString(String path) {
+        return getString(path, "");
+    }
+
+    public String getString(String path, String def) {
+        String val = get(path, def);
+        return (val != null) ? val : def;
+    }
+
+    public List<String> getStringList(String path) {
+        return getList(path, String.class);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> List<T> getList(String path, Class<T> type) {
+        List<?> list = get(path, Collections.emptyList());
+        List<T> result = new ArrayList<>();
+        for (Object object : list) {
+            if (type.isInstance(object)) {
+                result.add((T) object);
             }
         }
-
-        loadConfiguration();
+        return result;
     }
 
-    public Configuration(File file, Class<? extends ConfigurationAdapter> adapter)
-            throws ConfigurationException {
-        this(file, null, adapter);
+    public List<?> getList(String path) {
+        return getList(path, Object.class);
     }
 
-    private void loadConfiguration() {
-        isLoading = true;
-        try {
-            load(this.adapter.load(file).getMap());
-        }  catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            isLoading = false;
-        }
-    }
-
-    public void save() {
-        if (isLoading) {
-            return;
-        }
-        try {
-            adapter.save(this, file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void reload() {
-        loadConfiguration();
+    public List<?> getList(String path, List<?> def) {
+        List<?> val = get(path, def);
+        return (val != null) ? val : def;
     }
 }

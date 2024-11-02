@@ -22,7 +22,7 @@
         <dependency>
             <groupId>me.hexsook</groupId>
             <artifactId>originext-config</artifactId>
-            <version>1.0.0-beta1</version>
+            <version>1.0.0-beta3</version>
         </dependency>
         <dependency>
             <groupId>me.hexsook</groupId>

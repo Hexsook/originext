@@ -39,6 +39,11 @@
             <artifactId>originext-common</artifactId>
             <version>1.0.0-beta1</version>
         </dependency>
+        <dependency>
+            <groupId>me.hexsook</groupId>
+            <artifactId>originext-annotations</artifactId>
+            <version>1.0.0-unstable1</version>
+        </dependency>
     </dependencies>
 
 </project>

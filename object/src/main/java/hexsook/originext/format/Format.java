@@ -5,7 +5,7 @@ import hexsook.originext.object.Strings;
 import java.util.List;
 
 /**
- * oot string format class.
+ * Root string format class.
  */
 public abstract class Format {
 

@@ -6,7 +6,7 @@
     <parent>
         <groupId>me.hexsook</groupId>
         <artifactId>originext</artifactId>
-        <version>1.0.0-beta1</version>
+        <version>dev</version>
     </parent>
 
     <artifactId>originext-all</artifactId>
@@ -21,27 +21,27 @@
         <dependency>
             <groupId>me.hexsook</groupId>
             <artifactId>originext-config</artifactId>
-            <version>1.0.0-beta3</version>
+            <version>dev</version>
         </dependency>
         <dependency>
             <groupId>me.hexsook</groupId>
             <artifactId>originext-object</artifactId>
-            <version>1.0.0-beta1</version>
+            <version>dev</version>
         </dependency>
         <dependency>
             <groupId>me.hexsook</groupId>
             <artifactId>originext-reflection</artifactId>
-            <version>1.0.0-beta1</version>
+            <version>dev</version>
         </dependency>
         <dependency>
             <groupId>me.hexsook</groupId>
             <artifactId>originext-common</artifactId>
-            <version>1.0.0-beta2</version>
+            <version>dev</version>
         </dependency>
         <dependency>
             <groupId>me.hexsook</groupId>
             <artifactId>originext-annotations</artifactId>
-            <version>1.0.0-unstable1</version>
+            <version>dev</version>
         </dependency>
     </dependencies>
 

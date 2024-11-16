@@ -82,6 +82,10 @@ public class HostPort {
         return port;
     }
 
+    public Integer getPortOrDefault(int def) {
+        return port == null ? def : port;
+    }
+
     @Override
     public String toString() {
         if (port != null) {

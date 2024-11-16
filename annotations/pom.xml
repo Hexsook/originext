@@ -6,11 +6,11 @@
     <parent>
         <groupId>me.hexsook</groupId>
         <artifactId>originext</artifactId>
-        <version>1.0.0-beta1</version>
+        <version>dev</version>
     </parent>
 
     <artifactId>originext-annotations</artifactId>
-    <version>1.0.0-unstable1</version>
+    <version>dev</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

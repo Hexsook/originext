@@ -64,5 +64,9 @@ public class Pager {
         return (int) Math.ceil((double) amount / size);
     }
 
+    private Pager() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
+
 }
 

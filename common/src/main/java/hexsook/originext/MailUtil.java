@@ -39,4 +39,8 @@ public class MailUtil {
 
         Transport.send(message);
     }
+
+    private MailUtil() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
 }

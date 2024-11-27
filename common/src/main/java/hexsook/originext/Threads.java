@@ -32,4 +32,8 @@ public class Threads {
         ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
         service.scheduleAtFixedRate(runnable, delay, period, unit);
     }
+
+    private Threads() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
 }

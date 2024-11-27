@@ -47,4 +47,8 @@ public class ListUtil {
         }
         return ObjectUtil.isObject(list.get(0), clazz);
     }
+
+    private ListUtil() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
 }

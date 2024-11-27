@@ -18,4 +18,8 @@ public class Reflection {
         String[] nameSplit = clazz.getName().split("\\.");
         return nameSplit[nameSplit.length -1];
     }
+
+    private Reflection() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
 }

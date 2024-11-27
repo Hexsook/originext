@@ -113,4 +113,8 @@ public class ErrorlessReflection {
         }
         return null;
     }
+
+    private ErrorlessReflection() {
+        throw new UnsupportedOperationException("This class cannot be instantiated");
+    }
 }

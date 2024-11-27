@@ -2,8 +2,6 @@ package hexsook.originext.config.file.adapter;
 
 import hexsook.originext.config.Configuration;
 import hexsook.originext.config.file.FileConfigurationAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.snakeyaml.engine.v2.api.*;
 import org.snakeyaml.engine.v2.common.FlowStyle;
 import org.snakeyaml.engine.v2.nodes.Tag;
@@ -15,6 +13,7 @@ import java.nio.file.Files;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 
 /**
  * Yaml config file adapter.
@@ -23,7 +22,7 @@ public class YamlFileConfiguration extends FileConfigurationAdapter {
 
     public static final YamlFileConfiguration INSTANCE = new YamlFileConfiguration();
 
-    private static final Logger logger = LoggerFactory.getLogger(YamlFileConfiguration.class);
+    private static final Logger logger = Logger.getLogger(YamlFileConfiguration.class.getName());
 
     private final Supplier<Dump> yamlDumperSupplier = () -> {
         DumpSettings settings = DumpSettings.builder()
@@ -80,7 +79,7 @@ public class YamlFileConfiguration extends FileConfigurationAdapter {
                 try {
                     writer.write(str);
                 } catch (IOException e) {
-                    logger.error("Error while writing context to file");
+                    logger.severe("Error while writing context to file");
                 }
             }
 
@@ -89,7 +88,7 @@ public class YamlFileConfiguration extends FileConfigurationAdapter {
                 try {
                     writer.write(str, off, len);
                 } catch (IOException e) {
-                    logger.error("Error while writing context to file");
+                    logger.severe("Error while writing context to file");
                 }
             }
 
@@ -98,7 +97,7 @@ public class YamlFileConfiguration extends FileConfigurationAdapter {
                 try {
                     writer.flush();
                 } catch (IOException e) {
-                    logger.error("Error while flushing writer");
+                    logger.severe("Error while flushing writer");
                 }
             }
         });

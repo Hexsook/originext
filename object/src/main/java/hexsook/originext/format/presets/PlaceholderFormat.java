@@ -6,8 +6,6 @@ import hexsook.originext.object.Strings;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -37,21 +35,14 @@ public class PlaceholderFormat extends Format {
             return handleNullOrEmpty(input);
         }
 
+        String startSymbol = placeholderSection.substring(0, placeholderSection.indexOf("@a"));
+        String endSymbol = placeholderSection.substring(placeholderSection.indexOf("@a") + 2);
+
         for (String placeholder : comparison.keySet()) {
-            input = input.replace("{" + placeholder + "}", comparison.get(placeholder).toString());
+            input = input.replace(startSymbol + placeholder + endSymbol, comparison.get(placeholder).toString());
         }
 
-        String regex = "\\*\\{\\*(.*?)\\*}\\*";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-
-        StringBuffer result = new StringBuffer();
-        while (matcher.find()) {
-            matcher.appendReplacement(result, placeholderSection.replace("@*", matcher.group(1)));
-        }
-        matcher.appendTail(result);
-
-        return result.toString();
+        return input;
     }
 
     @Override

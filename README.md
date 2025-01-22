@@ -10,7 +10,6 @@ originext supports **Java 1.8** or above.
 ##### [`originext-object`](https://github.com/Hexsook/originext/tree/master/object): Provides object operations
 ##### [`originext-reflection`](https://github.com/Hexsook/originext/tree/master/reflection): Provides reflection operations
 ##### [`originext-common`](https://github.com/Hexsook/originext/tree/master/common): Provides common used classes and utilities
-##### [`originext-annotations`](https://github.com/Hexsook/originext/tree/master/annotations): Provides common used annotations
 
 ### Adding originext to your project
 **How to**: Add the dependency to pom.xml in your project:
@@ -37,4 +36,4 @@ originext supports **Java 1.8** or above.
 `-unstable` - Internal testing. (Very unstable!) <br>
 
 ##### Version naming rule (e.g. 1.3.2):
-**X** (Major version update) **. X** (Minor functional updates) **. X** (Bug fixes/Minor changes)
+**X** (Major code changes) **. X** (Minor functional updates) **. X** (Bug fixes/Minor changes)

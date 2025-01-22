@@ -42,9 +42,13 @@ public class NumberFormattedFormat extends Format {
 
         while (matcher.find()) {
             String number = matcher.group();
-            double parsedNumber = Double.parseDouble(number);
-            String formattedNumber = decimalFormat.format(parsedNumber);
-            matcher.appendReplacement(result, formattedNumber);
+            try {
+                double parsedNumber = Double.parseDouble(number);
+                String formattedNumber = decimalFormat.format(parsedNumber);
+                matcher.appendReplacement(result, formattedNumber);
+            } catch (NumberFormatException e) {
+                matcher.appendReplacement(result, number);
+            }
         }
         matcher.appendTail(result);
 

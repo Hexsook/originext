@@ -17,7 +17,7 @@ originext supports **Java 1.8** or above.
 ```xml
 <dependencies>
     <dependency>
-        <groupId>me.hexsook</groupId>
+        <groupId>io.github.hexsook</groupId>
         <artifactId>[module]</artifactId>
         <version>[version]</version>
         <scope>compile</scope>

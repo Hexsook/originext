@@ -6,6 +6,8 @@ import hexsook.originext.object.Strings;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -25,24 +27,40 @@ public class PlaceholderFormat extends Format {
     private final Map<String, Object> comparison;
 
     private PlaceholderFormat(String placeholderSection, Map<String, Object> comparison) {
-        this.placeholderSection = placeholderSection;
+        this.placeholderSection = placeholderSection == null ? "{@*}" : placeholderSection;
         this.comparison = comparison;
     }
 
     @Override
     public String format(String input) {
-        if (Strings.isNullOrWhite(input)){
+        if (Strings.isNullOrBlank(input)){
             return handleNullOrEmpty(input);
         }
 
-        String startSymbol = placeholderSection.substring(0, placeholderSection.indexOf("@a"));
-        String endSymbol = placeholderSection.substring(placeholderSection.indexOf("@a") + 2);
-
-        for (String placeholder : comparison.keySet()) {
-            input = input.replace(startSymbol + placeholder + endSymbol, comparison.get(placeholder).toString());
+        if (comparison.isEmpty()) {
+            return input;
         }
 
-        return input;
+        String startSymbol;
+        String endSymbol;
+
+        try {
+            startSymbol = placeholderSection.substring(0, placeholderSection.indexOf("@*"));
+            endSymbol = placeholderSection.substring(placeholderSection.indexOf("@*") + 2);
+        } catch (StringIndexOutOfBoundsException e) {
+            startSymbol = "{";
+            endSymbol = "}";
+        }
+
+        Pattern pattern = Pattern.compile(Pattern.quote(startSymbol) + "(.*?)" + Pattern.quote(endSymbol));
+        Matcher matcher = pattern.matcher(input);
+        StringBuffer result = new StringBuffer();
+        while (matcher.find()) {
+            String placeholder = matcher.group(1);
+            matcher.appendReplacement(result, comparison.getOrDefault(placeholder, "").toString());
+        }
+        matcher.appendTail(result);
+        return result.toString();
     }
 
     @Override

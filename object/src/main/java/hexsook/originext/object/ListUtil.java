@@ -48,6 +48,13 @@ public class ListUtil {
         return ObjectUtil.isObject(list.get(0), clazz);
     }
 
+    /**
+     * Checks if a list is null or empty.
+     */
+    public static boolean isNullOrEmpty(List<String> input) {
+        return input == null || input.isEmpty();
+    }
+
     private ListUtil() {
         throw new UnsupportedOperationException("This class cannot be instantiated");
     }

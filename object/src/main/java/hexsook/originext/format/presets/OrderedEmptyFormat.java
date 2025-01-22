@@ -2,8 +2,10 @@ package hexsook.originext.format.presets;
 
 import hexsook.originext.format.Format;
 import hexsook.originext.format.Formatter;
+import hexsook.originext.object.Strings;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -18,26 +20,38 @@ public class OrderedEmptyFormat extends Format {
     private final NumberedPlaceholderFormat placeholderFormat;
 
     public OrderedEmptyFormat(Object... replacers) {
-        placeholderFormat = new NumberedPlaceholderFormat(replacers);
+        this.placeholderFormat = new NumberedPlaceholderFormat(replacers);
     }
 
     @Override
     public String format(String input) {
-        return Formatter.format(replaceBraces(input), placeholderFormat);
+        if (Strings.isNullOrBlank(input)) {
+            return handleNullOrEmpty(input);
+        }
+
+        String formatted = replaceBraces(input, new AtomicInteger());
+        return Formatter.format(formatted, placeholderFormat);
     }
 
     @Override
     public List<String> format(List<String> input) {
-        return Formatter.format(input.stream().map(this::replaceBraces).collect(Collectors.toList()), placeholderFormat);
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        AtomicInteger index = new AtomicInteger();
+        return input.stream()
+                .map(s -> replaceBraces(s, index))
+                .map(s -> Formatter.format(s, placeholderFormat))
+                .collect(Collectors.toList());
     }
 
-    private String replaceBraces(String input) {
-        int index = 0;
+    private String replaceBraces(String input, AtomicInteger index) {
         StringBuilder result = new StringBuilder(input);
 
         int start = result.indexOf("{}");
         while (start != -1) {
-            String replacement = String.format("{%d}", index++);
+            String replacement = String.format("{%d}", index.getAndIncrement());
             result.replace(start, start + 2, replacement);
             start = result.indexOf("{}", start + replacement.length());
         }

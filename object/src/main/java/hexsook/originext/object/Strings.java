@@ -15,7 +15,7 @@ public class Strings {
     /**
      * Checks if a string is empty or all filled with whitespaces.
      */
-    public static boolean isAllWhitespace(String string) {
+    public static boolean isBlank(String string) {
         return string.trim().isEmpty();
     }
 
@@ -28,10 +28,10 @@ public class Strings {
 
     /**
      * Checks if a string is null or all filled with whitespaces.
-     * @see #isAllWhitespace(String)
+     * @see #isBlank(String)
      */
-    public static boolean isNullOrWhite(String input) {
-        return isNullOrEmpty(input) || isAllWhitespace(input);
+    public static boolean isNullOrBlank(String input) {
+        return isNullOrEmpty(input) || isBlank(input);
     }
 
     /**

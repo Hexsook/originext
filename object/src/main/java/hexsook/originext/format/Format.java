@@ -1,7 +1,5 @@
 package hexsook.originext.format;
 
-import hexsook.originext.object.Strings;
-
 import java.util.List;
 
 /**
@@ -11,14 +9,9 @@ public abstract class Format {
 
     protected String handleNullOrEmpty(String input) {
         if (input == null) {
-            return null;
+            return "";
         }
-
-        if (input.isEmpty() || Strings.isAllWhitespace(input)) {
-            return input;
-        }
-
-        throw new IllegalStateException("No proper conditions matched");
+        return input;
     }
 
     public abstract String format(String input);

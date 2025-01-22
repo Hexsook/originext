@@ -1,5 +1,8 @@
 package hexsook.originext.format;
 
+import hexsook.originext.object.ListUtil;
+import hexsook.originext.object.Strings;
+
 import java.util.List;
 
 /**
@@ -12,8 +15,16 @@ public class Formatter {
      * The higher the format rule, the higher the priority, that is, the format is executed sequentially
      */
     public static String format(String input, Format... formats) {
+        if (Strings.isNullOrBlank(input) || formats == null) {
+            return input;
+        }
         for (Format format : formats) {
-            input = format.format(input);
+            try {
+                input = format.format(input);
+            } catch (Exception e) {
+                System.err.println("Error applying format " + format.getClass().getSimpleName());
+                e.printStackTrace();
+            }
         }
         return input;
     }
@@ -23,8 +34,16 @@ public class Formatter {
      * @see #format(String, Format...)
      */
     public static List<String> format(List<String> input, Format... formats) {
+        if (ListUtil.isNullOrEmpty(input) || formats == null) {
+            return input;
+        }
         for (Format format : formats) {
-            input = format.format(input);
+            try {
+                input = format.format(input);
+            } catch (Exception e) {
+                System.err.println("Error applying format " + format.getClass().getSimpleName());
+                e.printStackTrace();
+            }
         }
         return input;
     }

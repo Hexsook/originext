@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>me.hexsook</groupId>
+        <groupId>io.github.hexsook</groupId>
         <artifactId>originext</artifactId>
-        <version>dev</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>originext-all</artifactId>
@@ -19,29 +19,29 @@
 
     <dependencies>
         <dependency>
-            <groupId>me.hexsook</groupId>
+            <groupId>io.github.hexsook</groupId>
             <artifactId>originext-config</artifactId>
-            <version>dev</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>me.hexsook</groupId>
+            <groupId>io.github.hexsook</groupId>
             <artifactId>originext-object</artifactId>
-            <version>dev</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>me.hexsook</groupId>
+            <groupId>io.github.hexsook</groupId>
             <artifactId>originext-reflection</artifactId>
-            <version>dev</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>me.hexsook</groupId>
+            <groupId>io.github.hexsook</groupId>
             <artifactId>originext-common</artifactId>
-            <version>dev</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>me.hexsook</groupId>
+            <groupId>io.github.hexsook</groupId>
             <artifactId>originext-annotations</artifactId>
-            <version>dev</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

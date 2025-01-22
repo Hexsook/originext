@@ -5,10 +5,10 @@ which help to reduce boilerplate code and offer alternative paradigms for creati
 originext supports **Java 1.8** or above.
 
 ### Modules
-##### [`originext-config`](https://github.com/Hexsook/originext/tree/master/config): Provides simplified ways to manage config ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-config)
-##### [`originext-object`](https://github.com/Hexsook/originext/tree/master/object): Provides object operations![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-object)
-##### [`originext-reflection`](https://github.com/Hexsook/originext/tree/master/reflection): Provides reflection operations![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-reflection)
-##### [`originext-common`](https://github.com/Hexsook/originext/tree/master/common): Provides common used classes and utilities![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-common)
+##### [`originext-config`](https://github.com/Hexsook/originext/tree/master/config): Provides simplified ways to manage config. ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-config)
+##### [`originext-object`](https://github.com/Hexsook/originext/tree/master/object): Provides object operations. ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-object)
+##### [`originext-reflection`](https://github.com/Hexsook/originext/tree/master/reflection): Provides reflection operations. ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-reflection)
+##### [`originext-common`](https://github.com/Hexsook/originext/tree/master/common): Provides common used classes and utilities. ![Maven Central Version](https://img.shields.io/maven-central/v/io.github.hexsook/originext-common)
 
 ### Adding originext to your project
 **How to**: Add the dependency to pom.xml in your project:

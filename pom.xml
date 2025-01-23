@@ -47,7 +47,6 @@
         <url>https://github.com/simpligility/ossrh-demo/tree/master</url>
     </scm>
 
-
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -84,7 +83,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <publishingServerId>central</publishingServerId>
-                    <autoPublish>false</autoPublish>
+                    <autoPublish>true</autoPublish>
                 </configuration>
             </plugin>
             <plugin>
@@ -144,5 +143,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

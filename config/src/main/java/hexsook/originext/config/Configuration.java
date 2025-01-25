@@ -193,7 +193,7 @@ public class Configuration {
     }
 
     public String getString(String path) {
-        return getString(path, "");
+        return getString(path, null);
     }
 
     public String getString(String path, String def) {
